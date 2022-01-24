@@ -6,6 +6,7 @@ const routes = new Router();
 routes.post('/login',               triagem.login);
 
 routes.post('/buscar_perguntas',    triagem.buscar_perguntas);
+routes.post('/buscar_perguntas_ativas',    triagem.buscar_perguntas_ativas);
 routes.post('/cadastrar_perguntas', triagem.cadastrar_perguntas);
 routes.post('/editar_perguntas',    triagem.editar_perguntas);
 

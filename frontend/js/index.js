@@ -7,6 +7,7 @@ async function login(){
         msgWithTime('center', 'error', 'Preencha corretamente os campos!', true, 3000);
         document.getElementById('usuario').value = '';
         document.getElementById('senha').value = '';
+        document.getElementById('usuario').focus();
     }else{
         let obj = { usuario: usuario, senha: senha }
 
@@ -15,12 +16,14 @@ async function login(){
                 msgWithTime('center', 'error', 'Usuário ou senha não encontrados!', true, 3000);
                 document.getElementById('usuario').value = '';
                 document.getElementById('senha').value = '';
+                document.getElementById('usuario').focus();
             }else{
                 console.log(res.dados.resposta[0]);
                 sessionStorage.server = server;
                 sessionStorage.nome_triagem = res.dados.resposta[0].nome;
                 sessionStorage.loged = "yes";
                 $.notify(`Bem-Vindo ${res.dados.resposta[0].nome}`, "success");
+                setTimeout(function () { location.replace("triagem.html"); },2000)
             }
         }).catch((err)=>{
             console.log(err);

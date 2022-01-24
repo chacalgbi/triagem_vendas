@@ -27,6 +27,22 @@ class triagem{
     async buscar_perguntas(req, res){
         tudo_ok = true;
         resp = {};
+        const query = `SELECT *, DATE_FORMAT(hora, '%d/%m/%Y %H:%i') as hora1 FROM perguntas;`;
+
+        await BD(query).then((ok)=>{
+            resp.dados = ok;
+            resp.msg = "Sucesso"; 
+        }).catch((erro)=>{
+            tudo_ok = false;
+            resp.msg = erro;      
+        });
+
+        API(resp, res, 200, tudo_ok);
+    }
+
+    async buscar_perguntas_ativas(req, res){
+        tudo_ok = true;
+        resp = {};
         const query = `SELECT *, DATE_FORMAT(hora, '%d/%m/%Y %H:%i') as hora1 FROM perguntas WHERE ativo="sim";`;
 
         await BD(query).then((ok)=>{
@@ -155,9 +171,12 @@ class triagem{
     async buscar_resp_cli(req, res){
         tudo_ok = true;
         resp = {};
-        const query = `SELECT clientes.nome_cli, perguntas.pergunta, respostas.resposta FROM respostas
+        const query = `SELECT clientes.nome_cli, clientes.obs, clientes.operador, DATE_FORMAT(hora_edicao, '%d/%m/%Y %H:%i') as hora, GROUP_CONCAT(CONCAT(perguntas.pergunta, '\n Res: ', respostas.resposta, '\n') separator " ") 
+        as perg FROM respostas
         INNER JOIN clientes ON respostas.id_cliente = clientes.id 
-        INNER JOIN perguntas ON respostas.id_pergunta = perguntas.id;`;
+        INNER JOIN perguntas ON respostas.id_pergunta = perguntas.id 
+        GROUP BY clientes.nome_cli
+        ORDER BY hora DESC;`;
 
         await BD(query).then((ok)=>{
             resp.dados = ok;

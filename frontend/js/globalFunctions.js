@@ -1,3 +1,61 @@
+var user = sessionStorage.nome_triagem;
+var loged = sessionStorage.loged;
+var server = sessionStorage.server;
+
+function verifyLogin(){
+    if(loged === 'yes'){
+        
+    }else{
+        msgWithTime('center', 'error', 'Por favor faça o login!', true, 3000);
+        setTimeout(function () { location.replace("index.html"); }, 3000);
+    }
+}
+
+function sair(){
+    loading(false, 'center', false, 2000, 'info', `Até logo ${user}`);
+    sessionStorage.nome_triagem = ""; 
+    sessionStorage.loged = ""; 
+    sessionStorage.server = "";
+    setTimeout(function() { location.replace("index.html"); }, 2200);
+}
+
+function formatar_celular(num){
+    let formatado = num.replace(/\D+/g, "");
+    let final = '';
+    if(formatado.length == 11){
+        final = formatado.replace(/(\d{2})?(\d{5})?(\d{4})/, "($1) $2-$3");
+    }else if(formatado.length == 10){
+        final = formatado.replace(/(\d{2})?(\d{4})?(\d{4})/, "($1) 9$2-$3");
+    }else if(formatado.length ==  9){
+        final = formatado.replace(/(\d{5})?(\d{4})/, "(77) $1-$2");
+    }else if(formatado.length ==  8){
+        final = formatado.replace(/(\d{4})?(\d{4})/, "(77) 9$1-$2");
+    }else{
+        final = "erro";
+    }
+    return final;
+}
+
+function constructSelect(array, value='', name=''){
+
+    let option = '';
+
+    if(name==='' || name ==='null'){
+        option += `<option value="" selected disabled>Selecione uma opção</option>`;
+    }else{
+        option += `<option selected value="${value}">${name}</option>`;
+    }
+
+    array.forEach((item, index)=>{
+        if(name != item.name){
+            option += `<option value="${item.id}">${item.name}</option>`;
+        }
+    });
+
+    return option;
+
+}
+
 function msgWithTime(position, icon, title, button, timer){
     // EXEMPLO: msgWithTime('center', 'success', 'Apagado!', true, 1000);
 
@@ -57,3 +115,5 @@ function BD(server, endPoint, obj){
         });
     })
 }
+
+verifyLogin();

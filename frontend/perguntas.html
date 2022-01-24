@@ -3,7 +3,7 @@
   <head>
       <meta name="robots" content="noindex">
       <meta charset="UTF-8">
-      <title>TRIAGEM DE VENDAS</title>
+      <title>TRIAGEM DE VENDAS - Perguntas</title>
       <link rel="shortcut icon" type="image/x-icon" href="./img/favicon/micks-favico-32x32-1.png">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -34,11 +34,11 @@
 
   </head>
 <body>
-
+    
     <div class="container-fluid">
-        <h1 class="h3 mb-2"><i class='bx bx-user-check'></i> Triagem de Vendas - Clientes Pendentes</h1>
+        <h1 class="h3 mb-2"><i class='bx bx-user-check'></i> Triagem de Vendas - Perguntas</h1>
+        <button type="button" class="btn btn-outline-dark" onclick="location.replace('triagem.html') ">Clientes Pendentes</button>
         <button type="button" class="btn btn-outline-dark" onclick="location.replace('concluidos.html') ">Clientes Concluídos</button>
-        <button type="button" class="btn btn-outline-dark" onclick="location.replace('perguntas.html') ">Perguntas</button>
         <br /><br />
         <div class="card">
 
@@ -47,52 +47,17 @@
                     <tr>
                         <th scope="col" class="all"></th>
                         <th scope="col" class="all">#</th>
-                        <th scope="col" class="all">Cliente</th>
-                        <th scope="col" class="none">Código</th>
-                        <th scope="col" class="all">Cidade</th>
-                        <th scope="col" class="all">Endereço</th>
-                        <th scope="col" class="none">Bairro</th>
-                        <th scope="col" class="all">Celular</th>
-                        <th scope="col" class="all">Triagem</th>
-                        <th scope="col" class="none">Fone</th>
-                        <th scope="col" class="all">Plano</th>
-                        <th scope="col" class="none">Tiket</th>
-                        <th scope="col" class="none">Perfil</th>
-                        <th scope="col" class="none">Técnico</th>
-                        <th scope="col" class="none">Serviço</th>
+                        <th scope="col" class="all">Pergunta</th>
+                        <th scope="col" class="all">Tipo</th>
+                        <th scope="col" class="all">Respostas</th>
+                        <th scope="col" class="all">Ativo?</th>
+                        <th scope="col" class="all">Cadastro</th>
+                        <th scope="col" class="all">Editar</th>
                     </tr>
                 </thead>
                 <tbody id="corpo" style="font-size: 13px;">
                 </tbody>
             </table>
-
-            <!-- Editar -->
-            <div class="modal fade" id="modal_edit" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="titulo_modal_editar">Preencha todos os campos</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div>Cliente: <label id="name_edit"></label></div>
-                            <label id="id_edit" style="display: none;"></label>
-
-                            <form id="form_edit">
-                            </form>
-
-                            <div class="mb-3">
-                                <labelclass="col-form-label">OBS:</label>
-                                <textarea class="form-control" rows="3" id="obs_insert"></textarea>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" id="btn_editar" onclick="cadastrarTriagem()">Enviar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </div>
@@ -100,6 +65,6 @@
     <script src="./js/bootstrap.bundle.min.js"></script>
     <script src="./js/datatables.js"></script>
     <script src="./js/globalFunctions.js"></script>
-    <script src="./js/triagem.js"></script>
+    <script src="./js/perguntas.js"></script>
 </body>
 </html>
