@@ -1,0 +1,22 @@
+{
+  "name": "triagem_vendas",
+  "version": "1.0.0",
+  "description": "API do sistema de Triagem de Novas Vendas",
+  "main": "triagem_vendas.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thomé Lucas A. Oliveira",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15",
+    "request": "^2.88.2"
+  }
+}

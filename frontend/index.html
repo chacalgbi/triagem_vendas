@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+      <meta name="robots" content="noindex">
+      <meta charset="UTF-8">
+      <title>TRIAGEM DE VENDAS</title>
+      <link rel="shortcut icon" type="image/x-icon" href="./img/favicon/micks-favico-32x32-1.png">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      
+      <link rel="stylesheet" href="./fontawesome-free/css/all.min.css" />
+      <link rel="stylesheet" href="./css/bootstrap.min.css" />
+      <link rel="stylesheet" href="./css/red/radar.css" />
+      <link rel="stylesheet" href="./css/tabela.css" />
+      <link rel='stylesheet' href='//unpkg.com/boxicons@2.0.7/css/boxicons.min.css' />
+      <link rel='stylesheet' href='//unpkg.com/boxicons@2.1.0/css/boxicons.min.css' />
+      <link rel='stylesheet' href='//cdn.datatables.net/searchbuilder/1.3.0/css/searchBuilder.dataTables.min.css' />
+      <link rel='stylesheet' href='//cdn.datatables.net/buttons/2.1.0/css/buttons.dataTables.min.css' />
+      <link rel='stylesheet' href='//cdn.datatables.net/datetime/1.1.1/css/dataTables.dateTime.min.css' />
+      <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" />
+      <link rel='stylesheet' href='https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css' />
+      <link rel='stylesheet' href='./css/login.css' />
+
+      <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
+
+      <script src="./js/sweetalert2.all.min.js"></script>
+      <script src="./js/pace.js"></script>
+      <script src="./js/notify.js"></script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script src="https://unpkg.com/boxicons@2.1.0/dist/boxicons.js"></script>
+      <script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>
+      <script src='https://cdn.datatables.net/searchbuilder/1.3.0/js/dataTables.searchBuilder.min.js'></script>
+      <script src='https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js'></script>
+      <script src='https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js'></script>
+      
+      <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+  </head>
+<body>
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Triagem de Vendas</h3>
+                        <p>Identifique-se para entrar</p>
+                        <form class="requires-validation" novalidate>
+
+                            <div class="col-md-12">
+                               <input class="form-control" type="text" id="usuario" placeholder="Usuário" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input class="form-control" type="password" id="senha" placeholder="Senha" required>
+                            </div>          
+
+                            <div class="form-button mt-3">
+                                <button id="entrar" type="button" onclick="login()" class="btn btn-primary">Entrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./js/index.js"></script>
+    <script type="text/javascript" src="./js/globalFunctions.js"></script>
+</body>
+</html>
