@@ -1,6 +1,16 @@
 var array_perguntas = [];
 var count_id = [];
 
+function verifyLogin(){
+    if(loged === 'yes'){
+        document.getElementById('user').innerHTML = "Operador: " + user;
+        getTriagens();
+    }else{
+        msgWithTime('center', 'error', 'Por favor faça o login!', true, 3000);
+        setTimeout(function () { location.replace("index.html"); }, 3000);
+    }
+}
+
 async function getTriagens(){
     await BD(server, 'buscar_clientes_pen', {}).then((res)=>{
         table(res.dados.resposta);
@@ -31,9 +41,9 @@ function insertQuestions(id_client, name_client){
             temp.forEach((nome, id)=>{
                 options.push({id: index, name: nome});
             });
-            content += `<select class="form-control" id="edit${index}">${constructSelect(options)}</select>`;
+            content += `<select class="form-control perguntas_select" id="edit${index}">${constructSelect(options)}</select>`;
         }else{
-            content += `<input type="text" class="form-control" id="edit${index}">`;
+            content += `<input type="text" class="form-control perguntas_input" id="edit${index}">`;
         }
         content += `</div>`;
     });
@@ -41,45 +51,66 @@ function insertQuestions(id_client, name_client){
 }
 
 async function cadastrarTriagem(){
+    let array_respostas = [];
+    let selects = document.querySelectorAll(".perguntas_select");
+    let inputs = document.querySelectorAll(".perguntas_input");
 
-    for (const [index, item] of count_id.entries()) {
-
-        let obj = {
-            id_cliente: document.getElementById('id_edit').innerHTML,
-            id_pergunta: item.id,
-        }
-
-		if(item.tipo === 'Seleção'){
-            obj.resposta = $(`#edit${index} :selected`).text();
-        }else{
-            obj.resposta = document.getElementById(`edit${index}`).value;
-        }
-
-        await BD(server, 'cadastrar_resposta', obj)
-        .then((res)=>{})
-        .catch((err)=>{
-            console.log(err);
-            msgWithTime('center', 'error', 'Erro ao cadastrar respostas!', true, 2000);
-        });       
-
-	}
-
-    let obj_cli = {
-        status: 'Concluído',
-        operador: user,
-        obs: document.getElementById('obs_insert').value,
-        id: document.getElementById('id_edit').innerHTML
+    for (let i = 0; i < selects.length; i++) {
+        const id = selects[i].id;
+        let valor = $(`#${id} :selected`).text();
+        array_respostas.push(valor);
     }
 
-    await BD(server, 'editar_cliente', obj_cli)
-    .then((res)=>{
-        loading(true, 'center', false, 1000, 'success', 'Cliente atualizado!');
-        setTimeout(function () { location.replace("triagem.html"); }, 1000)
-    })
-    .catch((err)=>{
-        console.log(err);
-        msgWithTime('center', 'error', 'Erro ao atualizar cliente!', true, 2000);
-    }); 
+    for (let i = 0; i < inputs.length; i++) {
+        const id = inputs[i].id;
+        let valor = document.getElementById(`${id}`).value;
+        array_respostas.push(valor);
+    }
+
+    console.log(array_respostas);
+
+    if(array_respostas.includes('Selecione uma opção') || array_respostas.includes('')){
+        msgWithTime('center', 'error', 'Responda todas as perguntas!', true, 2000);
+    }else{
+        for (const [index, item] of count_id.entries()) {
+
+            let obj = {
+                id_cliente: document.getElementById('id_edit').innerHTML,
+                id_pergunta: item.id,
+            }
+    
+            if(item.tipo === 'Seleção'){
+                obj.resposta = $(`#edit${index} :selected`).text();
+            }else{
+                obj.resposta = document.getElementById(`edit${index}`).value;
+            }
+    
+            await BD(server, 'cadastrar_resposta', obj)
+            .then((res)=>{})
+            .catch((err)=>{
+                console.log(err);
+                msgWithTime('center', 'error', 'Erro ao cadastrar respostas!', true, 2000);
+            });       
+    
+        }
+    
+        let obj_cli = {
+            status: 'Concluído',
+            operador: user,
+            obs: document.getElementById('obs_insert').value,
+            id: document.getElementById('id_edit').innerHTML
+        }
+    
+        await BD(server, 'editar_cliente', obj_cli)
+        .then((res)=>{
+            loading(true, 'center', false, 1000, 'success', 'Cliente atualizado!');
+            setTimeout(function () { location.replace("triagem.html"); }, 1000)
+        })
+        .catch((err)=>{
+            console.log(err);
+            msgWithTime('center', 'error', 'Erro ao atualizar cliente!', true, 2000);
+        });
+    }
 
 }
 
@@ -122,4 +153,4 @@ function table(array){
 
 }
 
-getTriagens();
+verifyLogin();

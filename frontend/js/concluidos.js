@@ -1,6 +1,16 @@
 var array_perguntas = [];
 var count_id = [];
 
+function verifyLogin(){
+    if(loged === 'yes'){
+        document.getElementById('user').innerHTML = "Operador: " + user;
+        respostas();
+    }else{
+        msgWithTime('center', 'error', 'Por favor faça o login!', true, 3000);
+        setTimeout(function () { location.replace("index.html"); }, 3000);
+    }
+}
+
 async function respostas(){
     await BD(server, 'buscar_resp_cli', {}).then((res)=>{
         table(res.dados.resposta);
@@ -10,7 +20,6 @@ async function respostas(){
     });
 
 }
-
 
 function table(array){
     let table = '';
@@ -33,4 +42,4 @@ function table(array){
 
 }
 
-respostas();
+verifyLogin();

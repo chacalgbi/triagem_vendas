@@ -2,15 +2,6 @@ var user = sessionStorage.nome_triagem;
 var loged = sessionStorage.loged;
 var server = sessionStorage.server;
 
-function verifyLogin(){
-    if(loged === 'yes'){
-        
-    }else{
-        msgWithTime('center', 'error', 'Por favor faça o login!', true, 3000);
-        setTimeout(function () { location.replace("index.html"); }, 3000);
-    }
-}
-
 function sair(){
     loading(false, 'center', false, 2000, 'info', `Até logo ${user}`);
     sessionStorage.nome_triagem = ""; 
@@ -115,5 +106,3 @@ function BD(server, endPoint, obj){
         });
     })
 }
-
-verifyLogin();

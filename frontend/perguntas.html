@@ -36,9 +36,18 @@
 <body>
     
     <div class="container-fluid">
-        <h1 class="h3 mb-2"><i class='bx bx-user-check'></i> Triagem de Vendas - Perguntas</h1>
+        <div class="row">
+            <div class="col-sm-10">
+                <h1 class="h3 mb-2"><i class='bx bx-user-check'></i> Triagem de Vendas - Perguntas</h1>
+            </div>
+            <div class="col-sm-2" style="float: right;">
+                <span id="user"></span>
+            </div>
+        </div>
+        
         <button type="button" class="btn btn-outline-dark" onclick="location.replace('triagem.html') ">Clientes Pendentes</button>
         <button type="button" class="btn btn-outline-dark" onclick="location.replace('concluidos.html') ">Clientes Concluídos</button>
+        <button type="button" class="btn btn-primary" onclick="" data-bs-toggle="modal" data-bs-target="#cadastrar_pergunta">Cadastrar Pergunta</button>
         <br /><br />
         <div class="card">
 
@@ -58,6 +67,43 @@
                 <tbody id="corpo" style="font-size: 13px;">
                 </tbody>
             </table>
+
+            <!-- Cadastrar Pergunta -->
+            <div class="modal fade" id="cadastrar_pergunta" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="titulo_modal_editar">Cadastro de Pergunta</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="col-form-label">Pergunta:</label>
+                                <input type="text" class="form-control" id="pergunta_insert" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="col-form-label">Tipo de Pergunta:</label>
+                                <select class="form-control" id="tipo_insert" onchange="select_input(this.value)">
+                                    <option value="Selecione uma opção" selected disabled>Selecione uma opção</option>
+                                    <option value="Texto">Texto</option>
+                                    <option value="Seleção">Seleção</option>
+                                </select>
+                            </div>
+
+                            <span id="display_msg" style="color: red; display: none;">Digite as respostas separadas por vírgula. EX: Sim,Não,Talvez,Depois</span>
+                            <div class="mb-3" id="div_resposta" style="display: none;">
+                                <label class="col-form-label">Resposta:</label>
+                                <input type="text" class="form-control" id="resposta_insert" />
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btn_inserir" onclick="cadastrar_pergunta()">Cadastrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
